@@ -1,0 +1,5 @@
+{
+  "type": "MockTfidfVectorizer",
+  "vocabulary_size": 10000,
+  "created": "2025-08-07T10:05:49.170651"
+}

@@ -1,0 +1,1 @@
+"""Data module for the Fake News Detector."""

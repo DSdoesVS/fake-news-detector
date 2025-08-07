@@ -1,0 +1,6 @@
+{
+  "type": "MockLogisticRegression",
+  "created": "2025-08-07T10:05:49.170563",
+  "features": 10000,
+  "accuracy": 0.85
+}

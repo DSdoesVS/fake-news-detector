@@ -1,0 +1,1 @@
+"""Utils module for the Fake News Detector."""

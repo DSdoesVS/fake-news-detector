@@ -1,0 +1,240 @@
+/* Main App Styles */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.main-container {
+  padding: 2rem 0;
+  min-height: 100vh;
+}
+
+.app-title {
+  color: white;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Card Styles */
+.prediction-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+/* Text Input Styles */
+.text-input {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.text-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Button Styles */
+.analyze-btn {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.analyze-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.analyze-btn:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+/* Result Styles */
+.result-real {
+  background: linear-gradient(45deg, #56ab2f, #a8e6cf);
+  color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.result-fake {
+  background: linear-gradient(45deg, #cb2d3e, #ef473a);
+  color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.confidence-bar {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 8px;
+  margin-top: 10px;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: white;
+  transition: width 0.8s ease;
+  border-radius: 10px;
+}
+
+/* Loading Styles */
+.loading-spinner {
+  color: #667eea;
+}
+
+.loading-text {
+  color: #667eea;
+  font-weight: 500;
+}
+
+/* Error Styles */
+.error-message {
+  background: linear-gradient(45deg, #ff6b6b, #ffa8a8);
+  color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* Character Counter */
+.char-counter {
+  font-size: 14px;
+  color: #6c757d;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.char-counter.warning {
+  color: #fd7e14;
+}
+
+.char-counter.danger {
+  color: #dc3545;
+}
+
+/* Prediction Details */
+.prediction-details {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.detail-label {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.detail-value {
+  font-weight: 600;
+}
+
+/* Header Styles */
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1rem 0;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+  }
+  
+  .app-subtitle {
+    font-size: 1rem;
+  }
+  
+  .prediction-card,
+  .input-card {
+    margin: 0 10px;
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
