@@ -22,6 +22,18 @@ CORS(app)
 # Global variables for model and vectorizer
 model = None
 vectorizer = None
+model_loaded = False
+
+def ensure_model_loaded():
+    """Ensure model is loaded before processing requests"""
+    global model, vectorizer, model_loaded
+    if not model_loaded:
+        load_model()
+
+# Global variables for model and vectorizer
+model = None
+vectorizer = None
+model_loaded = False
 
 def preprocess_text(text):
     """
@@ -48,10 +60,15 @@ def load_model():
     """
     Load the trained model and vectorizer
     """
-    global model, vectorizer
+    global model, vectorizer, model_loaded
     
     model_path = os.path.join(os.path.dirname(__file__), 'models', 'fake_news_model.pkl')
     vectorizer_path = os.path.join(os.path.dirname(__file__), 'models', 'tfidf_vectorizer.pkl')
+    
+    print(f"Looking for model at: {model_path}")
+    print(f"Looking for vectorizer at: {vectorizer_path}")
+    print(f"Model file exists: {os.path.exists(model_path)}")
+    print(f"Vectorizer file exists: {os.path.exists(vectorizer_path)}")
     
     try:
         if os.path.exists(model_path) and os.path.exists(vectorizer_path):
@@ -59,15 +76,23 @@ def load_model():
                 model = pickle.load(f)
             with open(vectorizer_path, 'rb') as f:
                 vectorizer = pickle.load(f)
+            model_loaded = True
             print("Model and vectorizer loaded successfully!")
+            print(f"Model type: {type(model)}")
+            print(f"Vectorizer type: {type(vectorizer)}")
+            return True
         else:
             print("Model files not found. Please train the model first.")
+            print(f"Model path: {model_path}")
+            print(f"Vectorizer path: {vectorizer_path}")
+            model_loaded = False
             return False
     except Exception as e:
         print(f"Error loading model: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        model_loaded = False
         return False
-    
-    return True
 
 @app.route('/')
 def home():
@@ -88,9 +113,10 @@ def health():
     """
     Health check endpoint
     """
+    ensure_model_loaded()
     return jsonify({
         "status": "healthy",
-        "model_loaded": model is not None and vectorizer is not None
+        "model_loaded": model_loaded and model is not None and vectorizer is not None
     })
 
 @app.route('/predict', methods=['POST'])
@@ -99,6 +125,9 @@ def predict():
     Predict if news article is fake or real
     """
     try:
+        # Ensure model is loaded
+        ensure_model_loaded()
+        
         # Get data from request
         data = request.get_json()
         
@@ -115,7 +144,7 @@ def predict():
             }), 400
         
         # Check if model is loaded
-        if model is None or vectorizer is None:
+        if not model_loaded or model is None or vectorizer is None:
             return jsonify({
                 "error": "Model not loaded. Please train the model first."
             }), 503
@@ -193,4 +222,4 @@ if __name__ == '__main__':
     load_model()
     
     # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
